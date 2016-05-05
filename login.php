@@ -1,4 +1,4 @@
-<?php include 'view/header.php'; ?>
+<?php include 'header.php'; ?>
 
 	<div class="login-page">
 		<div class="form">
@@ -10,4 +10,4 @@
 	  	</div>
 	</div>
 
-<?php include 'view/footer.php'; ?>
+<?php include 'footer.php'; ?>
