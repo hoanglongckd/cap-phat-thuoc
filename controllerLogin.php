@@ -12,9 +12,7 @@
 	if(!empty($level)) {
 		$_SESSION['user']['username'] = $username;
 		$_SESSION['user']['level'] = $level;
-		echo $_SESSION['user']['username'];
-		echo '<br>' . $_SESSION['user']['level'] . '<br>';
-		print_r($_SESSION);
+		header("Location: dashboard.php");
 	}
 	else
 		echo 'fail';

@@ -36,15 +36,16 @@
                             <div class="form-group">
                                 <label>Giới tính</label>
                                 <label class="radio-inline" for="nam">
-                                    <input type="radio" name="btnRadio" id="nam" value="1" checked>Nam
+                                    <input type="radio" name="gender" id="nam" value="1" checked>Nam
                                 </label>
                                 <label class="radio-inline" for="nu">
-                                    <input type="radio" name="btnRadio" id="nu" value="0">Nữ
+                                    <input type="radio" name="gender" id="nu" value="0">Nữ
                                 </label>
                                 <label class="radio-inline" for="other">
-                                    <input type="radio" name="btnRadio" id="other" value="2">Khác
+                                    <input type="radio" name="gender" id="other" value="2">Khác
                                 </label>
                             </div>
+                            <input type="hidden" name="action" value="add" />
                             <button type="submit" class="btn btn-default">Customer Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
