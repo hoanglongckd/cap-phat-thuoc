@@ -1,4 +1,12 @@
 <?php 
+	session_start();
+
+	include 'ControllerSession.php';
+	
+	$cs = new Session();
+	if (!$cs->checkUserLogin())
+		header("Location: login.php");
+	
 	include 'header.php';
 	include 'openBodyTag.php'; 
 	include 'navbar-top.php';

@@ -1,9 +1,8 @@
 <?php
-	session_start();
-	
+
 	class Session {
 		
-		public function checkUser() {
+		public function checkUserLogin() {
 			if ( !empty($_SESSION['user']) )
 				return true;
 			else

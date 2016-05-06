@@ -1,5 +1,14 @@
 <?php
+
 	include 'ControllerAdmin.php';
+	include_once 'ControllerSession.php';
+	
+	$cs = new Session();
+	if (!$cs->checkUserLogin())
+		header("Location: login.php");
+	if ($_SESSION['user']['level'] != 1)
+		header("Location: errors.php");
+	
 	include_once 'header.php';
 	include_once 'openBodyTag.php';
 	include_once 'navbar-top.php';
@@ -34,8 +43,15 @@
                             <tr class="odd gradeX" align="center">
                                 <td><?php echo $stt++; ?></td>
                                 <td><?php echo $user['username']; ?></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
+                                	<a href="ControllerAdmin.php?action=edit&id=<?php echo $user['id']; ?>">Edit</a>
+                                </td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> 
+                                	<a 	onclick="return deleteConfirm('Bạn có thật sự muốn xóa?')" 
+                                		href="ControllerAdmin.php?action=delete&id=<?php echo $user['id']; ?>">
+                                		Delete
+                                	</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

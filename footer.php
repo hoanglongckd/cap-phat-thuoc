@@ -5,12 +5,6 @@
 		<script type="text/javascript" src="public/js/metisMenu.min.js"></script>
 		<script type="text/javascript" src="public/js/sb-admin-2.js"></script>
 		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-	    <script>
-	    $(document).ready(function() {
-	        $('#dataTables-example').DataTable({
-	                responsive: true
-	        });
-	    });
-	    </script>
+	    <script type="text/javascript" src="public/js/myScript.js"></script>
 	</body>
 </html>

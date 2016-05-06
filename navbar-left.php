@@ -39,6 +39,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php if($_SESSION['user']['level'] == 1) : ?>
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -51,6 +52,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
