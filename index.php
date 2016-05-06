@@ -1,6 +1,8 @@
 <?php
-	session_start();
-	if ( !empty($_SESSION['user']) )
+	include 'controllerSession.php';
+	
+	$session = new Session();
+	if ($session->checkUser())
 		header("Location: dashboard.php");
 	else
 		header("Location: login.php");
