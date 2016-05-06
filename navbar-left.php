@@ -16,13 +16,13 @@
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Category<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Customer<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">List Category</a>
+                                    <a href="addcustomer.php">Add Customer</a>
                                 </li>
                                 <li>
-                                    <a href="#">Add Category</a>
+                                    <a href="#">List Customer</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
