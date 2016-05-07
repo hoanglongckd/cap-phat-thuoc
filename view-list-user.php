@@ -43,10 +43,10 @@
                             <tr class="odd gradeX" align="center">
                                 <td><?php echo $stt++; ?></td>
                                 <td><?php echo $user['username']; ?></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i>
                                 	<a href="ControllerAdmin.php?action=edit&id=<?php echo $user['id']; ?>">Edit</a>
                                 </td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> 
+                                <td class="center"><i class="fa fa-trash-o fa-fw"></i> 
                                 	<a 	onclick="return deleteConfirm('Bạn có thật sự muốn xóa?')" 
                                 		href="ControllerAdmin.php?action=delete&id=<?php echo $user['id']; ?>">
                                 		Delete
