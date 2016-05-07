@@ -29,12 +29,13 @@
                         <form action="ControllerBenh.php" method="POST">
                             <div class="form-group">
                                 <label for="tenbenh">Tên bệnh</label>
-                                <input type="text" class="form-control" name="tenbenh" id="tenbenh" required />
+                                <input type="text" class="form-control" name="tenbenh" id="tenbenh" required  
+                                	value="<?php echo (!empty($_SESSION['ThemBenh'])) ? $_SESSION['ThemBenh']['name'] : '' ?>" required />
                             </div>
                             <div class="form-group">
                                 <label for="mota">Mô tả</label>
-                                <textarea type="" class="form-control" name="mota" id="mota" required >
-                                </textarea>
+                                <textarea class="form-control" name="mota" id="mota" 
+                                	value="<?php echo (!empty($_SESSION['ThemBenh'])) ? $_SESSION['ThemBenh']['mota'] : '' ?>" ></textarea>
                             </div>
 
                             <input type="hidden" name="action" value="add" />
@@ -52,4 +53,7 @@
     </div>
     <!-- /#wrapper -->
 
-<?php include_once 'footer.php'; ?>
+<?php 
+unset($_SESSION['ThemBenh']);
+include_once 'footer.php'; 
+?>

@@ -34,11 +34,12 @@
                         <form action="ControllerBenh.php" method="POST">
                             <div class="form-group">
                                 <label for="tenbenh">Tên Bệnh</label>
-                                <input type="text" class="form-control" name="tenbenh" id="tenbenh" value="<?php echo $_SESSION['EditBenh']['TenBenh']; ?>" readonly required />
+                                <input type="text" class="form-control" name="tenbenh" id="tenbenh" 
+                                	value="<?php echo $_SESSION['EditBenh']['TenBenh']; ?>" readonly required />
                             </div>
                             <div class="form-group">
                                 <label for="mota">New Mô tả</label>
-                                <textarea class="form-control" name="mota" id="mota"  ></textarea>
+                                <textarea class="form-control" name="mota" id="mota"  ><?php echo $_SESSION['EditBenh']['MoTa']; ''?></textarea>
                             </div>
                             <input type="hidden" name="id" value="<?php echo $_SESSION['EditBenh']['id']; ?>" />
                             <?php unset($_SESSION['EditBenh']); ?>

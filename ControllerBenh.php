@@ -23,6 +23,8 @@
 					header("Location: view-list-benh.php");
 				
 			} else {
+				$_SESSION['ThemBenh']['name'] = $tenbenh;
+				$_SESSION['ThemBenh']['mota'] = $mota;
 				$_SESSION['flash-level'] = 'danger';
 				$_SESSION['flash-error'] = 'Loại bệnh này đã tồn tại.';
 				header("Location: view-add-benh.php");
@@ -50,6 +52,7 @@
 					$_SESSION['flash-message'] = 'Sửa thành công.';
 					header("Location: view-list-benh.php");
 				} else {
+
 					$_SESSION['flash-level'] = 'danger';
 					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
 					header("Location: view-list-benh.php");
