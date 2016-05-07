@@ -42,6 +42,15 @@
 			$statement->closeCursor();
 			return $row;
 		}
+		
+		public function delete($db, $id) {
+			$query = "DELETE FROM loaithuoc where id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
 	}
 
 

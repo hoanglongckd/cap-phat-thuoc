@@ -52,11 +52,11 @@
                                 <td><?php echo $thuoc['SoLuongTonKho']; ?></td>
                                 <td><?php echo $thuoc['MoTa']; ?></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                	<a href="ControllerHang.php?action=edit&id=<?php echo $thuoc['id']; ?>">Edit</a>
+                                	<a href="ControllerThuoc.php?action=edit&id=<?php echo $thuoc['id']; ?>">Edit</a>
                                 </td>
                                 <td class="center"><i class="fa fa-trash-o fa-fw"></i> 
                                 	<a 	onclick="return deleteConfirm('Bạn có thật sự muốn xóa?')" 
-                                		href="ControllerHang.php?action=delete&id=<?php echo $thuoc['id']; ?>">
+                                		href="ControllerThuoc.php?action=delete&id=<?php echo $thuoc['id']; ?>">
                                 		Delete
                                 	</a>
                                 </td>

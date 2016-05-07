@@ -64,12 +64,12 @@
                             
                             <div class="form-group">
                                 <label for="TenThuoc">Tên Thuốc</label>
-                                <input type="text" name="TenThuoc" id="TenThuoc" value="<?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['TenThuoc']; ?>" class="form-control" />
+                                <input type="text" name="TenThuoc" id="TenThuoc" value="<?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['TenThuoc']; ?>" class="form-control" required />
                             </div>
                             
                             <div class="form-group">
                                 <label for="DinhLuong">Định Lượng Thuốc</label>
-                                <input type="text" name="DinhLuong" id="DinhLuong" value="<?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['DinhLuong']; ?>" class="form-control" />
+                                <input type="text" name="DinhLuong" id="DinhLuong" value="<?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['DinhLuong']; ?>" class="form-control" required />
                             </div>
                             
                             <div class="form-group">

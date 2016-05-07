@@ -32,7 +32,7 @@
 				if (valid) {
 					$_SESSION['flash-level'] = 'success';
 					$_SESSION['flash-message'] = 'Thêm thành công!';
-					header("Location: view-list-hang.php");
+					header("Location: view-list-thuoc.php");
 				} else {
 					$_SESSION['flash-level'] = 'danger';
 					$_SESSION['flash-error'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
@@ -81,14 +81,14 @@
 			break;
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id');
-			if ($mh->delete_hang($db, $id)) {
+			if ($mt->delete($db, $id)) {
 				$_SESSION['flash-level'] = 'success';
 				$_SESSION['flash-message'] = 'Xóa thành công!';
 			} else {
 				$_SESSION['flash-level'] = 'danger';
 				$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
 			}
-			header("Location: view-list-hang.php");
+			header("Location: view-list-thuoc.php");
 			break;
 		default:
 			$thuocs = $mt->list_thuoc($db);
