@@ -42,13 +42,13 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i> Drug<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">List Product</a>
+                                    <a href="ControllerThuoc.php?action=getadd">Add Drug</a>
                                 </li>
                                 <li>
-                                    <a href="#">Add Product</a>
+                                    <a href="view-list-thuoc.php">List Drug</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
