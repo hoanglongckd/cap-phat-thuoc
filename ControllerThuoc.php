@@ -5,7 +5,7 @@
 	$cs = new Session();
 	if (!$cs->checkUserLogin()) {
 		header("Location: login.php");
-		return 0;
+		return;
 	}
 	require_once 'ModelConnectDatabase.php';
 	include 'ModelBenh.php';

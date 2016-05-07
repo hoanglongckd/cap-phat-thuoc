@@ -1,13 +1,6 @@
 <?php
 
 	include 'ControllerAdmin.php';
-	include_once 'ControllerSession.php';
-	
-	$cs = new Session();
-	if (!$cs->checkUserLogin())
-		header("Location: login.php");
-	if ($_SESSION['user']['level'] != 1)
-		header("Location: errors.php");
 	
 	include_once 'header.php';
 	include_once 'openBodyTag.php';

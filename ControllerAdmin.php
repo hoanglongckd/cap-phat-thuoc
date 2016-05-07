@@ -1,7 +1,18 @@
 <?php 
 	
 	session_start();
+	include_once 'ControllerSession.php';
 	
+	$cs = new Session();
+	if (!$cs->checkUserLogin()) {
+		header("Location: login.php");
+		return;
+	}
+	if ($_SESSION['user']['level'] != 1) {
+		header("Location: errors.php");
+		return;
+	}
+		
 	require_once 'ModelConnectDatabase.php';
 	include 'ModelAdmin.php';
 
