@@ -53,6 +53,22 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Nhập Thuốc<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="ControllerNhapThuoc.php?action=add">Thêm đơn hàng</a>
+                                </li>
+                                <li>
+                                    <a href="ControllerNhapThuoc.php?action=">Sửa đơn hàng</a>
+                                </li>
+                                <li>
+                                    <a href="view-list-nhap-hang.php">List đơn hàng</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
                         <?php if($_SESSION['user']['level'] == 1) : ?>
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
@@ -66,7 +82,11 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php endif; ?>
+                         <?php endif; ?>
+                         
+                       	
+                        
+                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
