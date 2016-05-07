@@ -22,7 +22,7 @@
                                     <a href="view-add-benh.php">Thêm Bệnh</a>
                                 </li>
                                 <li>
-                                    <a href="#">Danh Sách Bệnh</a>
+                                    <a href="view-list-benh.php">Danh Sách Bệnh</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
