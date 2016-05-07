@@ -46,16 +46,25 @@
 			$id = filter_input(INPUT_POST, 'id');
 			$tenbenh = filter_input(INPUT_POST, 'tenbenh');
 			$mota = filter_input(INPUT_POST, 'mota');
-				$valid = $ma->post_edit_benh($db, $id, $tenbenh, $mota);
-				if ($valid) {
-					$_SESSION['flash-level'] = 'success';
-					$_SESSION['flash-message'] = 'Sửa thành công.';
-					header("Location: view-list-benh.php");
-				} else {
-
+				if(!$ma->loaibenh_exist($db, $tenbenh)){
+					$valid = $ma->post_edit_benh($db, $id, $tenbenh, $mota);
+					if ($valid) {
+						$_SESSION['flash-level'] = 'success';
+						$_SESSION['flash-message'] = 'Sửa thành công.';
+						header("Location: view-list-benh.php");
+					} else {
+	
+						$_SESSION['flash-level'] = 'danger';
+						$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+						header("Location: view-list-benh.php");
+					}
+				}else{
+					$_SESSION['EditBenh']['id'] = $id;
+					$_SESSION['EditBenh']['TenBenh'] = $tenbenh;
+					$_SESSION['EditBenh']['MoTa'] = $mota;
 					$_SESSION['flash-level'] = 'danger';
-					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-					header("Location: view-list-benh.php");
+					$_SESSION['flash-error'] = 'Loại bệnh này đã tồn tại. Hãy dùng tên khác!';
+					header("Location: view-edit-benh.php");
 				}
 			break;
 		case 'delete':

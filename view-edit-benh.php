@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="tenbenh">Tên Bệnh</label>
                                 <input type="text" class="form-control" name="tenbenh" id="tenbenh" 
-                                	value="<?php echo $_SESSION['EditBenh']['TenBenh']; ?>" readonly required />
+                                	value="<?php echo $_SESSION['EditBenh']['TenBenh']; ?>" required />
                             </div>
                             <div class="form-group">
                                 <label for="mota">New Mô tả</label>
