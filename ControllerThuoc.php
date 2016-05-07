@@ -91,7 +91,7 @@
 			header("Location: view-list-hang.php");
 			break;
 		default:
-			$hangs = $mh->list_hang($db);
+			$thuocs = $mt->list_thuoc($db);
 			break;
 	}
 

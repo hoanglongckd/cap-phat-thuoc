@@ -29,6 +29,19 @@
 			$statement->closeCursor();
 			return $valid;
 		}
+		
+		public function list_thuoc($db) {
+			$query = "SELECT loaithuoc.id, loaithuoc.TenThuoc, loaithuoc.DinhLuong
+						, loaithuoc.SoLuongTonKho, loaithuoc.MoTa, loaibenh.TenBenh
+						, hang.TenHang FROM loaithuoc, loaibenh, hang 
+						WHERE loaithuoc.idLoaiBenh = loaibenh.id AND loaithuoc.idHang = hang.id 
+						ORDER BY hang.TenHang";
+			$statement = $db->prepare($query);
+			$statement->execute();
+			$row = $statement->fetchAll();
+			$statement->closeCursor();
+			return $row;
+		}
 	}
 
 
