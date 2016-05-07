@@ -11,6 +11,6 @@
 		$error_messages = $e->getMessage();
 		include 'errors.php';
 		exit();
+		
 	}
-
 ?>

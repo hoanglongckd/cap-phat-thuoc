@@ -16,13 +16,13 @@
                             <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Customer<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Loại Bệnh<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="addcustomer.php">Add Customer</a>
+                                    <a href="view-add-benh.php">Thêm Bệnh</a>
                                 </li>
                                 <li>
-                                    <a href="#">List Customer</a>
+                                    <a href="view-list-benh.php">Danh Sách Bệnh</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
