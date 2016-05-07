@@ -1,13 +1,11 @@
 <?php
 
-	include 'ControllerAdmin.php';
+	include 'ControllerHang.php';
 	include_once 'ControllerSession.php';
 	
 	$cs = new Session();
 	if (!$cs->checkUserLogin())
 		header("Location: login.php");
-	if ($_SESSION['user']['level'] != 1)
-		header("Location: errors.php");
 	
 	include_once 'header.php';
 	include_once 'openBodyTag.php';
@@ -32,23 +30,25 @@
                         <thead>
                             <tr align="center">
                                 <th>STT</th>
-                                <th>Username</th>
+                                <th>Tên Hãng</th>
+                                <th>Mô Tả</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php $stt = 0; ?>
-                        <?php foreach($users as $user) : ?>
+                        <?php foreach($hangs as $hang) : ?>
                             <tr class="odd gradeX" align="center">
                                 <td><?php echo ++$stt; ?></td>
-                                <td><?php echo $user['username']; ?></td>
+                                <td><?php echo $hang['TenHang']; ?></td>
+                                <td><?php echo $hang['MoTa']; ?></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                	<a href="ControllerAdmin.php?action=edit&id=<?php echo $user['id']; ?>">Edit</a>
+                                	<a href="ControllerHang.php?action=edit&id=<?php echo $hang['id']; ?>">Edit</a>
                                 </td>
                                 <td class="center"><i class="fa fa-trash-o fa-fw"></i> 
                                 	<a 	onclick="return deleteConfirm('Bạn có thật sự muốn xóa?')" 
-                                		href="ControllerAdmin.php?action=delete&id=<?php echo $user['id']; ?>">
+                                		href="ControllerHang.php?action=delete&id=<?php echo $hang['id']; ?>">
                                 		Delete
                                 	</a>
                                 </td>

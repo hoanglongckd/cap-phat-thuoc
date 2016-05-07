@@ -27,6 +27,20 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-home fa-fw"></i> Manufacturer<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="view-add-hang.php">Add Manufacturer</a>
+                                </li>
+                                <li>
+                                    <a href="view-list-hang.php">List Manufacturer</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
                         <li>
                             <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
