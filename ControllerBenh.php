@@ -1,7 +1,12 @@
 <?php 
 	
 	session_start();
-	
+	include 'ControllerSession.php';
+	$cs = new Session();
+	if (!$cs->checkUserLogin()) {
+		header("Location: login.php");
+		return 0;
+	}
 	require_once 'ModelConnectDatabase.php';
 	include 'ModelBenh.php';
 

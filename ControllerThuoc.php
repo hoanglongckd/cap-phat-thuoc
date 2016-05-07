@@ -1,7 +1,12 @@
 <?php 
 	
 	session_start();
-	
+	include 'ControllerSession.php';
+	$cs = new Session();
+	if (!$cs->checkUserLogin()) {
+		header("Location: login.php");
+		return 0;
+	}
 	require_once 'ModelConnectDatabase.php';
 	include 'ModelBenh.php';
 	include 'ModelHang.php';
@@ -51,32 +56,48 @@
 			break;
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id');
-			$hang = $mh->get_edit_hang($db, $id);
-			if (!empty($hang)) {
-				$_SESSION['SuaHang'] = $hang;
-				header("Location: view-edit-hang.php");
+			$thuoc = $mt->get_edit_thuoc($db, $id);
+			if (!empty($thuoc)) {
+				$_SESSION['SuaThuoc'] = $thuoc;
+				$_SESSION['benhs'] = $mb->list_benh($db);
+				$_SESSION['hangs'] = $mh->list_hang($db);
+				header("Location: view-edit-thuoc.php");
 			} else {
 				$_SESSION['flash-level'] = 'danger';
 				$_SESSION['flash-error'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-				header("Location: view-list-hang.php");
+				header("Location: view-list-thuoc.php");
 			}
 			break;
 		case 'postedit':
 			$id = filter_input(INPUT_POST, 'id');
-			$name = filter_input(INPUT_POST, 'name');
-			$description = filter_input(INPUT_POST, 'description');
-			$valid = $mh->post_edit_hang($db, $id, $name, $description);
-			if ($valid) {
-				$_SESSION['flash-level'] = 'success';
-				$_SESSION['flash-message'] = 'Sửa thành công.';
-				header("Location: view-list-hang.php");
+			$idHang = filter_input(INPUT_POST, 'idHang');
+			$idBenh = filter_input(INPUT_POST, 'idBenh');
+			$tenThuoc = filter_input(INPUT_POST, 'TenThuoc');
+			$dinhLuong = filter_input(INPUT_POST, 'DinhLuong');
+			$moTa = filter_input(INPUT_POST, 'MoTa');
+			if (!$mt->thuoc_exist_not_itself($db, $id, $tenThuoc, $idHang, $idBenh)) {
+				$valid = $mt->post_edit_thuoc($db, $id, $tenThuoc, $dinhLuong, $moTa, $idBenh, $idHang);
+				if ($valid) {
+					$_SESSION['flash-level'] = 'success';
+					$_SESSION['flash-message'] = 'Sửa thành công.';
+					header("Location: view-list-thuoc.php");
+				} else {
+					$_SESSION['flash-level'] = 'danger';
+					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+					header("Location: view-list-thuoc.php");
+				}
 			} else {
-				$_SESSION['SuaHang']['id'] = $id;
-				$_SESSION['SuaHang']['TenHang'] = $name;
-				$_SESSION['SuaHang']['MoTa'] = $description;
+				$_SESSION['SuaThuoc']['id'] = $id;
+				$_SESSION['SuaThuoc']['TenThuoc'] = $tenThuoc;
+				$_SESSION['SuaThuoc']['DinhLuong'] = $dinhLuong;
+				$_SESSION['SuaThuoc']['MoTa'] = $moTa;
+				$_SESSION['SuaThuoc']['idHang'] = $idHang;
+				$_SESSION['SuaThuoc']['idLoaiBenh'] = $idBenh;
+				$_SESSION['benhs'] = $mb->list_benh($db);
+				$_SESSION['hangs'] = $mh->list_hang($db);
 				$_SESSION['flash-level'] = 'danger';				
-				$_SESSION['flash-message'] = 'Tên hãng đã tồn tại.';
-				header("Location: view-edit-hang.php");
+				$_SESSION['flash-error'] = 'Tên thuốc tương ứng với tên hãng và tên bệnh đã tồn tại.';
+				header("Location: view-edit-thuoc.php");
 			}
 			break;
 		case 'delete':

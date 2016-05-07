@@ -3,8 +3,23 @@
 	class Thuoc {
 		
 		public function thuoc_exist($db, $tenThuoc, $idHang, $idBenh) {
-			$query = "SELECT id FROM loaithuoc where TenThuoc = :tenThuoc AND idLoaiBenh = :idBenh AND idHang = :idHang";
+			$query = "SELECT id FROM loaithuoc WHERE TenThuoc = :tenThuoc AND idLoaiBenh = :idBenh AND idHang = :idHang";
 			$statement = $db->prepare($query);
+			$statement->bindValue(':tenThuoc', $tenThuoc);
+			$statement->bindValue(':idBenh', $idBenh);
+			$statement->bindValue(':idHang', $idHang);
+			$statement->execute();
+			$valid = ($statement->rowCount() == 1);
+			$statement->closeCursor();
+			return $valid;
+		}
+		
+		// Kiểm tra xem tên thuốc đã tồn tại hay chưa, ngoại trừ chính nó.
+		public function thuoc_exist_not_itself($db, $id, $tenThuoc, $idHang, $idBenh) {
+			$query = "SELECT id FROM loaithuoc 
+						WHERE id != :id AND TenThuoc = :tenThuoc AND idLoaiBenh = :idBenh AND idHang = :idHang";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
 			$statement->bindValue(':tenThuoc', $tenThuoc);
 			$statement->bindValue(':idBenh', $idBenh);
 			$statement->bindValue(':idHang', $idHang);
@@ -25,6 +40,33 @@
 			$statement->bindValue(':moTa', $moTa);
 			$statement->bindValue(':idLoaiBenh', $idLoaiBenh);
 			$statement->bindValue(':idHang', $idHang);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
+		
+		public function get_edit_thuoc($db, $id) {
+			$query = "SELECT * FROM loaithuoc WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$row = $statement->fetch();
+			$statement->closeCursor();
+			return $row;
+		}
+		
+		public function post_edit_thuoc($db, $id, $tenThuoc, $dinhLuong, $moTa, $idBenh, $idHang) {
+			$query = "UPDATE loaithuoc SET 
+						TenThuoc = :tenThuoc, DinhLuong = :dinhLuong, MoTa = :moTa
+						, idLoaiBenh = :idBenh, idHang = :idHang
+						WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':tenThuoc', $tenThuoc);
+			$statement->bindValue(':dinhLuong', $dinhLuong);
+			$statement->bindValue(':moTa', $moTa);
+			$statement->bindValue(':idBenh', $idBenh);
+			$statement->bindValue(':idHang', $idHang);
+			$statement->bindValue(':id', $id);
 			$valid = $statement->execute();
 			$statement->closeCursor();
 			return $valid;

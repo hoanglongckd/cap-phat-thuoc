@@ -1,7 +1,12 @@
 <?php 
 	
 	session_start();
-	
+	include 'ControllerSession.php';
+	$cs = new Session();
+	if (!$cs->checkUserLogin()) {
+		header("Location: login.php");
+		return 0;
+	}
 	require_once 'ModelConnectDatabase.php';
 	include 'ModelHang.php';
 
@@ -54,7 +59,7 @@
 				$_SESSION['SuaHang']['TenHang'] = $name;
 				$_SESSION['SuaHang']['MoTa'] = $description;
 				$_SESSION['flash-level'] = 'danger';				
-				$_SESSION['flash-message'] = 'Tên hãng đã tồn tại.';
+				$_SESSION['flash-error'] = 'Tên hãng đã tồn tại.';
 				header("Location: view-edit-hang.php");
 			}
 			break;

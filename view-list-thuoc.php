@@ -1,12 +1,7 @@
 <?php
 
 	
-	include_once 'ControllerSession.php';
 	include 'ControllerThuoc.php';
-	$cs = new Session();
-	if (!$cs->checkUserLogin())
-		header("Location: login.php");
-	
 	include_once 'header.php';
 	include_once 'openBodyTag.php';
 	include_once 'navbar-top.php';
@@ -18,7 +13,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">User
+                        <h1 class="page-header">Drug
                             <small>List</small>
                         </h1>
                     </div>

@@ -34,8 +34,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="mota">Mô tả</label>
-                                <textarea class="form-control" name="mota" id="mota" 
-                                	value="<?php echo (!empty($_SESSION['ThemBenh'])) ? $_SESSION['ThemBenh']['mota'] : '' ?>" ></textarea>
+                                <textarea rows="10" class="form-control" name="mota" id="mota" 
+                                	><?php echo (!empty($_SESSION['ThemBenh'])) ? $_SESSION['ThemBenh']['mota'] : '' ?></textarea>
                             </div>
 
                             <input type="hidden" name="action" value="add" />

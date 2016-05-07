@@ -1,11 +1,6 @@
 <?php
 
 	include 'ControllerBenh.php';
-	include_once 'ControllerSession.php';
-	
-	$cs = new Session();
-	if (!$cs->checkUserLogin())
-		header("Location: login.php");
 	
 	include_once 'header.php';
 	include_once 'openBodyTag.php';
