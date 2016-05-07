@@ -22,7 +22,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Manufacturer
+                        <h1 class="page-header">Drug
                             <small>Add</small>
                         </h1>
                     </div>
@@ -34,30 +34,47 @@
                         <form action="ControllerThuoc.php" method="POST">
                             <div class="form-group">
                                 <label for="TenHang">Tên Hãng Sản Xuất Thuốc</label>
-                                <select class="form-control" name="TenHang" id="TenHang">
+                                <select class="form-control" name="idHang" id="TenHang">
                                 <?php foreach ($hangs as $hang) : ?>
-                                	<option value="<?php echo $hang['id']?>"><?php echo $hang['TenHang']?></option>
+                                	<option value="<?php echo $hang['id']?>" 
+                                		<?php 
+                                			if (!empty($_SESSION['Thuoc'])) {
+                                				if ($_SESSION['Thuoc']['IdHang'] == $hang['id'])
+                                					echo 'selected';
+                                			}
+                                		?> ><?php echo $hang['TenHang']?></option>
                                 <?php endforeach; ?>
                                 </select>
                             </div>
                             
                             <div class="form-group">
                                 <label for="TenBenh">Tên Hãng</label>
-                                <select class="form-control" name="TenBenh" id="TenBenh">
+                                <select class="form-control" name="idBenh" id="TenBenh">
                                 <?php foreach ($benhs as $benh) : ?>
-                                	<option value="<?php echo $benh['id']?>"><?php echo $benh['TenBenh']?></option>
+                                	<option value="<?php echo $benh['id']?>" 
+                                		<?php 
+                                			if (!empty($_SESSION['Thuoc'])) {
+                                				if ($_SESSION['Thuoc']['IdBenh'] == $benh['id'])
+                                					echo 'selected';
+                                			}
+                                		?> ><?php echo $benh['TenBenh']?></option>
                                 <?php endforeach; ?>
                                 </select>
                             </div>
                             
                             <div class="form-group">
                                 <label for="TenThuoc">Tên Thuốc</label>
-                                <input type="text" name="TenThuoc" id="TenThuoc" class="form-control" />
+                                <input type="text" name="TenThuoc" id="TenThuoc" value="<?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['TenThuoc']; ?>" class="form-control" />
                             </div>
                             
                             <div class="form-group">
                                 <label for="DinhLuong">Định Lượng Thuốc</label>
-                                <input type="text" name="DinhLuong" id="DinhLuong" class="form-control" />
+                                <input type="text" name="DinhLuong" id="DinhLuong" value="<?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['DinhLuong']; ?>" class="form-control" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="MoTa">Mô Tả</label>
+                                <textarea rows="10" name="MoTa" id="MoTa" class="form-control"><?php if (!empty($_SESSION['Thuoc']) )  echo $_SESSION['Thuoc']['MoTa']; ?></textarea>
                             </div>
                             
                             <input type="hidden" name="action" value="postadd" />
@@ -76,5 +93,6 @@
     <!-- /#wrapper -->
 
 <?php 
+	unset($_SESSION['Thuoc']);
 	include_once 'footer.php'; 
 ?>

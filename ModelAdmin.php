@@ -27,6 +27,7 @@
 			$statement->bindValue(':username', $username);
 			$statement->execute();
 			$valid = ($statement->rowCount() == 1);
+			$statement->closeCursor();
 			return $valid;
 		}
 		
