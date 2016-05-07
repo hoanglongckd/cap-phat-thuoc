@@ -22,12 +22,29 @@
 		}
 		
 		public function get_edit_hang($db, $id) {
-			
+			$query = "SELECT * FROM hang WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue('id', $id);
+			$statement->execute();
+			$row = $statement->fetch();
+			$statement->closeCursor();
+			return $row;
+		}
+		
+		public function post_edit_hang($db, $id, $tenHang, $moTa) {
+			$query = "UPDATE hang SET TenHang = :tenHang, MoTa = :moTa where id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':tenHang', $tenHang);
+			$statement->bindValue(':moTa', $moTa);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
 		}
 		
 		public function delete_hang($db, $id) {
 			$query = "DELETE FROM hang where id = :id";
-			$statement = $db->prepare($id);
+			$statement = $db->prepare($query);
 			$statement->bindValue(':id', $id);
 			$valid = $statement->execute();
 			$statement->closeCursor();

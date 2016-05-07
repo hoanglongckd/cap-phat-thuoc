@@ -30,36 +30,32 @@
 			break;
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id');
-			$user = $ma->get_edit_user($db, $id);
-			if (!empty($user)) {
-				$_SESSION['EditUser'] = $user;
-				header("Location: view-edit-user.php");
+			$hang = $mh->get_edit_hang($db, $id);
+			if (!empty($hang)) {
+				$_SESSION['SuaHang'] = $hang;
+				header("Location: view-edit-hang.php");
 			} else {
 				$_SESSION['flash-level'] = 'danger';
 				$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-				header("Location: view-list-user.php");
+				header("Location: view-list-hang.php");
 			}
 			break;
 		case 'postedit':
 			$id = filter_input(INPUT_POST, 'id');
-			$username = filter_input(INPUT_POST, 'username');
-			$password = filter_input(INPUT_POST, 'password');
-			$rePassword = filter_input(INPUT_POST, 're-password');
-			if ($password == $rePassword) {
-				$valid = $ma->post_edit_user($db, $id, $username, $password);
-				if ($valid) {
-					$_SESSION['flash-level'] = 'success';
-					$_SESSION['flash-message'] = 'Sửa thành công.';
-					header("Location: view-list-user.php");
-				} else {
-					$_SESSION['flash-level'] = 'danger';
-					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-					header("Location: view-list-user.php");
-				}
+			$name = filter_input(INPUT_POST, 'name');
+			$description = filter_input(INPUT_POST, 'description');
+			$valid = $mh->post_edit_hang($db, $id, $name, $description);
+			if ($valid) {
+				$_SESSION['flash-level'] = 'success';
+				$_SESSION['flash-message'] = 'Sửa thành công.';
+				header("Location: view-list-hang.php");
 			} else {
-				$_SESSION['flash-level'] = 'danger';
-				$_SESSION['flash-message'] = 'Mật khẩu xác nhận không trùng khớp.';
-				header("Location: ControllerAdmin.php?action=edit&id=$id");
+				$_SESSION['SuaHang']['id'] = $id;
+				$_SESSION['SuaHang']['TenHang'] = $name;
+				$_SESSION['SuaHang']['MoTa'] = $description;
+				$_SESSION['flash-level'] = 'danger';				
+				$_SESSION['flash-message'] = 'Tên hãng đã tồn tại.';
+				header("Location: view-edit-hang.php");
 			}
 			break;
 		case 'delete':
