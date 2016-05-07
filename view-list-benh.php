@@ -40,7 +40,7 @@
                         <?php $stt = 0; ?>
                         <?php foreach($benhs as $benh) : ?>
                             <tr class="odd gradeX" align="center">
-                                <td><?php echo $stt++; ?></td>
+                                <td><?php echo ++$stt; ?></td>
                                 <td><?php echo $benh['TenBenh']; ?></td>
                                 <td><?php echo $benh['MoTa']; ?></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i>
