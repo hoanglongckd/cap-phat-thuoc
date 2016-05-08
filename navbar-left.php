@@ -29,26 +29,26 @@
                         </li>
 
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-home fa-fw"></i> Manufacturer<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-home fa-fw"></i> Hãng thuốc<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="view-add-hang.php">Add Manufacturer</a>
+                                    <a href="view-add-hang.php">Thêm hãng thuốc</a>
                                 </li>
                                 <li>
-                                    <a href="view-list-hang.php">List Manufacturer</a>
+                                    <a href="view-list-hang.php">Liệt kê hãng thuốc</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-cube fa-fw"></i> Drug<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cube fa-fw"></i> Thuốc<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="ControllerThuoc.php?action=getadd">Add Drug</a>
+                                    <a href="ControllerThuoc.php?action=getadd">Thêm thuốc</a>
                                 </li>
                                 <li>
-                                    <a href="view-list-thuoc.php">List Drug</a>
+                                    <a href="view-list-thuoc.php">Liệt kê thuốc</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -64,6 +64,19 @@
                                 </li>
                                 <li>
                                     <a href="view-list-nhap-hang.php">List đơn hàng</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-minus fa-fw"></i> Xuất thuốc<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="ControllerXuatThuoc.php?action=getexport">Xuất đơn hàng </a>
+                                </li>
+                                <li>
+                                    <a href="view-list-xuat-thuoc.php">Liệt kê đơn hàng xuất</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

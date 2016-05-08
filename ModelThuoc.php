@@ -85,6 +85,33 @@
 			return $row;
 		}
 		
+		// Lay danh sach thuoc khi co idBenh va idHang
+		public function get_thuoc($db, $idBenh, $idHang) {
+			$query = "SELECT id, TenThuoc FROM loaithuoc WHERE idLoaiBenh = :idBenh AND idHang = :idHang";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':idBenh', $idBenh);
+			$statement->bindValue(':idHang', $idHang);
+			$statement->execute();
+// 			if ($statement->rowCount() == 1) {
+// 				$row = $statement->fetch();
+// 			} else {
+				$row = $statement->fetchAll();
+// 			}
+			$statement->closeCursor();
+			return $row;
+		}
+		
+		// Lay so luong thuoc trong kho
+		public function get_so_luong($db, $id) {
+			$query = "SELECT SoLuongTonKho FROM loaithuoc WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$row = $statement->fetch();
+			$statement->closeCursor();
+			return $row;
+		}
+		
 		public function delete($db, $id) {
 			$query = "DELETE FROM loaithuoc where id = :id";
 			$statement = $db->prepare($query);
