@@ -60,9 +60,6 @@
                                     <a href="ControllerNhapThuoc.php?action=add">Thêm đơn hàng</a>
                                 </li>
                                 <li>
-                                    <a href="ControllerNhapThuoc.php?action=">Sửa đơn hàng</a>
-                                </li>
-                                <li>
                                     <a href="view-list-nhap-hang.php">List đơn hàng</a>
                                 </li>
                             </ul>

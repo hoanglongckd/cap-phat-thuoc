@@ -32,7 +32,10 @@
                             <tr align="center">
                                 <th>STT</th>
                                 <th>Tên thuốc</th>
+                                <th>Tên hãng</th>
+                                <th>Tên bệnh</th>
                                 <th>Ngày nhập </th>
+                                <th>Ngày sửa </th>
                                 <th>Số lượng nhập</th>
                                 <th>Số tiền mỗi đơn vị</th>
                                 <th>Thành tiền</th>
@@ -45,8 +48,11 @@
                         <?php foreach($donhangs as $donhang) : ?>
                             <tr class="odd gradeX" align="center">
                                 <td><?php echo ++$stt; ?></td>
-                                <td><?php echo $donhang['tenthuoc'] ?></td>
+                                <td><?php echo $donhang['TenThuoc'] ?></td>
+                                <td><?php echo $donhang['TenHang'] ?></td>
+                                <td><?php echo $donhang['TenBenh'] ?></td>
                                 <td><?php echo $donhang['NgayNhap']; ?></td>
+                                <td><?php echo $donhang['NgaySua'] ?></td>
                                 <td><?php echo $donhang['SoLuongNhap']; ?></td>
                                 <td><?php echo $donhang['SoTienTrenMotDonVi']; ?></td>
                                 <td><?php echo $donhang['ThanhTien']; ?></td>

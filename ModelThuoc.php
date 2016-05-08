@@ -120,6 +120,30 @@
 			$statement->closeCursor();
 			return $valid;
 		}
+		
+		// them moi
+		
+		public function nhap_thuoc($db, $id,$soLuongTrongKho) {
+			$query = "UPDATE loaithuoc SET
+						SoLuongTonKho = :soLuong
+						WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':soLuong', $soLuongTrongKho);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
+		
+		public function list_all_thuoc($db) {
+			$query = "SELECT * FROM loaithuoc
+						WHERE 1 ORDER BY TenThuoc";
+			$statement = $db->prepare($query);
+			$statement->execute();
+			$list = $statement->fetchAll();
+			$statement->closeCursor();
+			return $list;
+		}
 	}
 
 
