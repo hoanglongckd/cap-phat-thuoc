@@ -23,6 +23,7 @@ function checkTenHang() {
 	} else if (idHang == "") {
 		var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Vui lòng chọn Tên hãng sản xuất thuốc.</li></ul></div></div>';
 		$("#errors").html(errors);
+		$("#insert-input-drug-export").html("");
 	}
 }
 
@@ -37,6 +38,7 @@ function exportDrug() {
 			} else if (idHang == "") {
 				var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Vui lòng chọn Tên hãng sản xuất thuốc.</li></ul></div></div>';
 				$("#errors").html(errors);
+				
 			} else if (idBenh == "") {
 				var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Vui lòng chọn Tên bệnh.</li></ul></div></div>';
 				$("#errors").html(errors);
@@ -66,8 +68,50 @@ function exportDrug() {
 									async: false,
 									data: {"idThuoc": idThuoc},
 									success: function (data) {
-	//									alert(data);
 										$("#insert-input-to-export").html(data);
+										
+										$("#exportdrug").click(function () {
+											var soLuongXuat = parseInt($("#soluongxuat").val());
+											console.log(soLuongXuat);
+											var soLuongTonKho = parseInt($("#tonkho").val());
+											console.log(soLuongTonKho);
+											var soTien = parseInt($("#sotien").val());
+											console.log(soTien);
+											
+											if (soLuongXuat > soLuongTonKho) {
+												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc xuất đi không thể lớn hơn số lượng thuốc tồn kho.</li></ul></div></div>';
+												$("#errors").html(errors);
+												console.log("aaaa")
+											}else if (soLuongXuat <= 0) {
+												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc xuất đi phải lớn hơn 0.</li></ul></div></div>';
+												$("#errors").html(errors);
+												console.log("bbbb")
+											}else if (soTien <= 0) {
+												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số tiền trên một đơn vị phải lớn hơn 0.</li></ul></div></div>';
+												$("#errors").html(errors);
+												console.log("cccc")
+											}else {
+												var idThuoc = parseInt($('#TenThuoc').val());
+												console.log(idThuoc)
+												var action = $('#action').val();
+												console.log(action);
+												var url = 'ControllerXuatThuoc.php';
+												$.ajax({
+													url: url,
+													type: 'post',
+													cache: false,
+													async: false,
+													data: {"action": action, "idThuoc": idThuoc, "soLuongXuat": soLuongXuat, "soTien": soTien},
+													success: function (data) {
+														if (data != "success")
+															$("#errors").html(data);
+														else 
+															window.location="/cap-phat-thuoc/view-list-thuoc.php"
+													}
+												});
+											}
+										});
+										
 									}
 								});
 							}

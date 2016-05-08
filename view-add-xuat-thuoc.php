@@ -55,9 +55,6 @@
                             
                 			<div id="insert-input-drug-export"></div>
                             
-                            <input type="hidden" name="action" value="postexport" />
-                            <button type="submit" class="btn btn-default">Add Drug</button>
-                            <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>
                 </div>
