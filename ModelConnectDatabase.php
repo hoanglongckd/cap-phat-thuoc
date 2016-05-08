@@ -11,6 +11,6 @@
 		$error_messages = $e->getMessage();
 		include 'errors.php';
 		exit();
-		
 	}
+	date_default_timezone_set("Asia/Ho_Chi_Minh");
 ?>

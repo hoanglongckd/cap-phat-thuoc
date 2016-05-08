@@ -106,7 +106,7 @@ function exportDrug() {
 														if (data != "success")
 															$("#errors").html(data);
 														else 
-															window.location="/cap-phat-thuoc/view-list-thuoc.php"
+															window.location="/cap-phat-thuoc/view-list-xuat-thuoc.php"
 													}
 												});
 											}

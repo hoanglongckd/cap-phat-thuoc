@@ -47,7 +47,6 @@
 			$idBenh = filter_input(INPUT_POST, 'idBenh');
 			$idHang = filter_input(INPUT_POST, 'idHang');
 			$thuocs = $mt->get_thuoc($db, $idBenh, $idHang);
-// 			print_r($thuocs);
 			$data = '';
 			if ( !empty($thuocs) ) {
 				$data .= '<div class="form-group">';
@@ -86,34 +85,6 @@
 			$data .= '<button type="button" id="exportdrug" onclick="exportDrug()" class="btn btn-default">Add Drug</button>';
 			$data .= '<button type="reset" class="btn btn-default">Reset</button>';
 			echo $data;
-			break;
-		case 'postadd':
-			$idHang = filter_input(INPUT_POST, 'idHang');
-			$idBenh = filter_input(INPUT_POST, 'idBenh');
-			$tenThuoc = filter_input(INPUT_POST, 'TenThuoc');
-			$dinhLuong = filter_input(INPUT_POST, 'DinhLuong');
-			$moTa = filter_input(INPUT_POST, 'MoTa');
-			if (!$mt->thuoc_exist($db, $tenThuoc, $idHang, $idBenh)) {
-				$mt->add_thuoc($db, $tenThuoc, $dinhLuong, $moTa, $idBenh, $idHang);
-				if (valid) {
-					$_SESSION['flash-level'] = 'success';
-					$_SESSION['flash-message'] = 'Thêm thành công!';
-					header("Location: view-list-thuoc.php");
-				} else {
-					$_SESSION['flash-level'] = 'danger';
-					$_SESSION['flash-error'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-					header("Location: ControllerThuoc.php?action=getadd");
-				}
-			} else {
-				$_SESSION['flash-level'] = 'danger';
-				$_SESSION['flash-error'] = 'Tên thuốc ứng với tên hãng và tên bệnh đã tồn tại.';
-				$_SESSION['Thuoc']['IdHang'] = $idHang;
-				$_SESSION['Thuoc']['IdBenh'] = $idBenh;
-				$_SESSION['Thuoc']['TenThuoc'] = $tenThuoc;
-				$_SESSION['Thuoc']['DinhLuong'] = $dinhLuong;
-				$_SESSION['Thuoc']['MoTa'] = $moTa;
-				header("Location: ControllerThuoc.php?action=getadd");
-			}
 			break;
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id');
@@ -173,7 +144,7 @@
 			header("Location: view-list-thuoc.php");
 			break;
 		default:
-			$thuocs = $mt->list_thuoc($db);
+			$xuatthuocs = $mxt->list_xuat_thuoc($db);
 			break;
 	}
 
