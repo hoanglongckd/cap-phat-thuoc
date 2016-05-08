@@ -11,6 +11,7 @@
 	include 'ModelBenh.php';
 	include 'ModelHang.php';
 	include 'ModelThuoc.php';
+	include 'ModelXuatThuoc.php';
 
 	$action = filter_input(INPUT_POST, 'action');
 	if (empty($action))
@@ -19,12 +20,28 @@
 	$mb = new Benh();
 	$mh = new Hang();
 	$mt = new Thuoc();
+	$mxt = new XuatThuoc();
 	
 	switch ($action) {
 		case 'getexport':
 			$_SESSION['benhs'] = $mb->list_benh($db);
 			$_SESSION['hangs'] = $mh->list_hang($db);
 			header("Location: view-add-xuat-thuoc.php");
+			break;
+		case 'postexport':
+			$idThuoc = filter_input(INPUT_POST, 'idThuoc');
+			$soLuongXuat = filter_input(INPUT_POST, 'soLuongXuat');
+			$soTien = filter_input(INPUT_POST, 'soTien');
+			$thanhTien = ( (int)$soLuongXuat ) * ( (int)$soTien );
+			$ngayXuat = date("Y-m-d");
+			if ($mxt->add_xuat_thuoc($db, $soLuongXuat, $soTien, $thanhTien, $ngayXuat, $idThuoc)) {
+				$mt->decrement($db, $idThuoc, $soLuongXuat);
+				$_SESSION['flash-level'] = 'success';
+				$_SESSION['flash-message'] = 'Xuất thuốc thành công!';
+				echo 'success';
+			} else {
+				echo 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+			}
 			break;
 		case 'getthuoc':
 			$idBenh = filter_input(INPUT_POST, 'idBenh');
@@ -43,24 +60,31 @@
 				$data .= '</select>';
 				$data .= '</div>';
 				$data .= '<div id="insert-input-to-export"></div>';
-// 				$data += '<div class="form-group">';
-// 				$data += '<label for="tonkho">Tồn Kho</label>';
-// 				$data += '<input type="text" class="form-control" name="tonKho" id="tonkho" required value="' . $thuoc[];
 			} else {
 				$data .= '<div class="form-group">';
 				$data .= '<input type="text" class="form-control" value="Không có thuốc trong kho." disabled />';
 			}
 			echo $data;
-			break;
+			break;			
 		case 'getsoluongthuoc';
 			$idThuoc = filter_input(INPUT_POST, 'idThuoc');
 			$thuoc = $mt->get_so_luong($db, $idThuoc);
 			$data = '';
 			$data .= '<div class="form-group"';
-			$data .= '<label>Số lượng tồn kho</label>';
-			$data .= '<input type="text" class="form-control" value="' . $thuoc['SoLuongTonKho'] . '" readonly />';
+			$data .= '<label for="">Số lượng tồn kho</label>';
+			$data .= '<input type="text" class="form-control" name="tonkho" id="tonkho" value="' . $thuoc['SoLuongTonKho'] . '" readonly />';
 			$data .= '</div>';
 			$data .= '<div class="form-group">';
+			$data .= '<label for="soluongxuat">Số lượng xuất</label>';
+			$data .= '<input type="number" class="form-control" name="soluongxuat" id="soluongxuat" required />';
+			$data .= '</div>';
+			$data .= '<div class="form-group">';
+			$data .= '<label for="sotien">Số tiền trên một đơn vị</label>';
+			$data .= '<input type="number" class="form-control" name="sotien" id="sotien" required />';
+			$data .= '</div>';
+			$data .= '<input type="hidden" name="action" id="action" value="postexport" />';
+			$data .= '<button type="button" id="exportdrug" onclick="exportDrug()" class="btn btn-default">Add Drug</button>';
+			$data .= '<button type="reset" class="btn btn-default">Reset</button>';
 			echo $data;
 			break;
 		case 'postadd':

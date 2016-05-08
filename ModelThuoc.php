@@ -120,6 +120,16 @@
 			$statement->closeCursor();
 			return $valid;
 		}
+		
+		// Giam so luong thuoc trong kho khi xuat
+		public function decrement($db, $id, $soLuong) {
+			$query = "UPDATE loaithuoc SET SoLuongTonKho = (SoLuongTonKho - :soLuong) WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':soLuong', $soLuong);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$statement->closeCursor();
+		}
 	}
 
 
