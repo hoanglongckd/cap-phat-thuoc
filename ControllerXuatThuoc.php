@@ -60,6 +60,7 @@
 			$data .= '<label>Số lượng tồn kho</label>';
 			$data .= '<input type="text" class="form-control" value="' . $thuoc['SoLuongTonKho'] . '" readonly />';
 			$data .= '</div>';
+			$data .= '<div class="form-group">';
 			echo $data;
 			break;
 		case 'postadd':
