@@ -18,8 +18,6 @@
 	switch ($action) {
 
 		case 'add':
-			$listthuoc = $drug->list_all_thuoc($db);//////////////////////////////
-			$_SESSION['thuocs'] = $listthuoc;//////////////////////////////////
 			$listbenh = $benh->list_benh($db);
 			$_SESSION['benhs'] = $listbenh;
 			$listhang = $hang->list_hang($db);
@@ -29,20 +27,18 @@
 		case 'add-2':
 			$soLuongNhap = filter_input(INPUT_POST, 'soluong');
 			$sotiendonvi = filter_input(INPUT_POST, 'fee');
-			$thanhtien = filter_input(INPUT_POST, 'thanhtien');
+			$thanhtien = $soLuongNhap*$sotiendonvi;
 			$ngaynhap = date('Y-m-d');
-			$idthuoc = filter_input(INPUT_POST, 'TenThuoc');
+			$idthuoc = filter_input(INPUT_POST, 'idThuoc');
 			if (!empty($row = $drug->get_edit_thuoc($db,$idthuoc))) {
 				//lay dc loai thuoc theo idBenh va idHang ten benh them moi don nhap hang thanh cong
-				$idBenh = $row['idBenh'];
+				$idBenh = $row['idLoaiBenh'];
 				$idHang = $row['idHang'];
 				if($ma->add_nhap_hang($db, $soLuongNhap,$sotiendonvi,$thanhtien,$ngaynhap,$idthuoc,$idHang,$idBenh)){
 					// them moi don nhap hang thanh cong
 					$soLuongTrongKho = $row['SoLuongTonKho']+$soLuongNhap;
 					if(!$drug->nhap_thuoc($db, $row['id'],$soLuongTrongKho)){
 						//+ them so luong thuoc khong thanh cong
-						$listthuoc = $drug->list_all_thuoc($db);//////////////////////////////////
-						$_SESSION['thuocs'] = $listthuoc;//////////////////////////////////
 						$listbenh = $benh->list_benh($db);
 						$_SESSION['benhs'] = $listbenh;
 						$listhang = $hang->list_hang($db);
@@ -58,8 +54,6 @@
 					}
 				}else{
 					// them don hang thuoc that bai
-					$listthuoc = $drug->list_all_thuoc($db);//////////////////////////////////
-					$_SESSION['thuocs'] = $listthuoc;//////////////////////////////////
 					$listbenh = $benh->list_benh($db);
 					$_SESSION['benhs'] = $listbenh;
 					$listhang = $hang->list_hang($db);
@@ -102,18 +96,18 @@
 			$sotiendonvi = filter_input(INPUT_POST, 'fee');
 			$thanhtien = filter_input(INPUT_POST, 'thanhtien');
 			$ngaysua = date('Y-m-d');
-			$idthuoc = filter_input(INPUT_POST, 'TenThuoc');
-			$idHang = filter_input(INPUT_POST, 'idHang');
-			$idBenh = filter_input(INPUT_POST, 'idBenh');
-			if ($ma->post_edit_nhap_thuoc($db, $soLuongNhap,$sotiendonvi,$thanhtien,$ngaysua,$idthuoc,$idHang,$idBenh)) {
+			$id = filter_input(INPUT_POST, 'id');
+		 	$loaithuoc = $ma->get_nhap_thuoc_by_id($db, $id);
+		 	$idthuoc = $loaithuoc['idLoaiThuoc'];
+			if ($ma->post_edit_nhap_thuoc($db, $soLuongNhap,$sotiendonvi,$thanhtien,$ngaysua,$id)) {
 				//sua don nhap hang thanh cong
-				if(!empty($row = $drug->get_thuoc_by_idBenh_idHang($db,$idBenh,$idHang))){
-					// lay dc loai thuoc theo idBenh va idHang
+				if(!empty($row = $drug->get_edit_thuoc($db,$idthuoc))){
+					// lay dc loai thuoc theo idthuoc
 					$soLuongTrongKho = $row['SoLuongTonKho']+$soLuongNhap-$soLuongCu;
 					if(!$drug->nhap_thuoc($db, $row['id'],$soLuongTrongKho)){
 						//sua so luong thuoc khong thanh cong
 						$_SESSION['flash-level'] = 'danger';
-						$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+						$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.1';
 						header("Location: view-list-nhap-hang.php");
 					}else{
 						//sua thuoc thanh cong
@@ -124,13 +118,13 @@
 				}else{
 					// lay loai thuoc that bai
 					$_SESSION['flash-level'] = 'danger';
-					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.2';
 					header("Location: view-list-nhap-hang.php");
 				}
 			} else {
 				// sua don hang that bai
 					$_SESSION['flash-level'] = 'danger';
-					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.3';
 					header("Location: view-list-nhap-hang.php");
 			}
 			break;
@@ -138,10 +132,10 @@
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id');
 			$donhang = $ma->get_nhap_thuoc_by_id($db, $id);
-			if ($ma->delete_benh($db, $id)) {
-				if(!empty($row = $drug->get_thuoc_by_idBenh_idHang($db,$donhang['idBenh'],$donhang['idHang']))){
-					// lay dc loai thuoc theo idBenh va idHang
-					$soLuongTrongKho = $row['SoLuongTonKho']-$donhang['SoLuongTonKho'];
+			if ($ma->delete_don_nhap_hang($db, $id)) {
+				if(!empty($row = $drug->get_edit_thuoc($db,$donhang['idLoaiThuoc']))){
+					// lay dc loai thuoc theo idloaithuoc
+					$soLuongTrongKho = $row['SoLuongTonKho']-$donhang['SoLuongNhap'];
 					if(!$drug->nhap_thuoc($db, $row['id'],$soLuongTrongKho)){
 						//sua so luong thuoc khong thanh cong
 						$_SESSION['flash-level'] = 'danger';
@@ -150,7 +144,7 @@
 					}else{
 						//sua thuoc thanh cong
 						$_SESSION['flash-level'] = 'success';
-						$_SESSION['flash-message'] = 'Xoa thành công.';
+						$_SESSION['flash-message'] = 'Xóa thành công.';
 						header("Location: view-list-nhap-hang.php");
 					}
 				}else{
@@ -166,6 +160,44 @@
 			}
 			
 			break;
+		case 'getthuoc':
+			$idBenh = filter_input(INPUT_POST, 'idBenh');
+			$idHang = filter_input(INPUT_POST, 'idHang');
+			$thuocs = $drug->get_thuoc($db, $idBenh, $idHang);
+			$data = '';
+			if ( !empty($thuocs) ) {
+				$data .= '<div class="form-group">';
+				$data .= '<label for="TenThuoc">Tên Thuốc</label>';
+				$data .= '<select class="form-control" name="idThuoc" id="TenThuoc" required>';
+				$data .= '<option value="">Chọn tên thuốc</option>';
+				foreach($thuocs as $thuoc) {
+					$data .= '<option value="' . $thuoc['id'] . '">' . $thuoc['TenThuoc'] . '</option>';
+				}
+				$data .= '</select>';
+				$data .= '</div>';
+				$data .= '<div id="insert-input-to-import"></div>';
+			} else {
+				$data .= '<div class="form-group">';
+				$data .= '<input type="text" class="form-control" value="Không có thuốc trong kho." disabled />';
+			}
+			echo $data;
+			break;
+		case 'getsoluongthuoc';
+			$data = '';
+			$data .= '<div class="form-group">';
+			$data .= '<label for="soluong">Số lượng nhập</label>';
+			$data .= '<input type="number" class="form-control" name="soluong" id="soluong" required />';
+			$data .= '</div>';
+			$data .= '<div class="form-group">';
+			$data .= '<label for="fee">Số tiền trên một đơn vị</label>';
+			$data .= '<input type="number" class="form-control" name="fee" id="fee" required />';
+			$data .= '</div>';
+			$data .= '<input type="hidden" name="action" value="add-2" />';
+			$data .= '<button type="submit" class="btn btn-default">Thêm đơn hàng</button>';
+			$data .= '<button type="reset" class="btn btn-default">Reset</button>';
+			echo $data;
+		break;
+			
 		default:
 			$donhangs = $ma->list_don_hang($db);
 			break;

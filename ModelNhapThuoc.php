@@ -63,28 +63,24 @@
 			return $row;
 		}
 		
-		public function post_edit_nhap_thuoc($db, $soLuongNhap,$sotiendonvi,$thanhtien,$ngaysua,$idthuoc,$idHang,$idBenh) {
+		public function post_edit_nhap_thuoc($db, $soLuongNhap,$sotiendonvi,$thanhtien,$ngaysua,$id) {
 			$query = "UPDATE `nhapthuoc` 
 					SET `SoLuongNhap`=:Soluong,`SoTienTrenMotDonVi`=:soTienDonVi,
-						`ThanhTien`=:thanhTien,`NgayNhap`=:ngayNhap,`NgaySua`=:ngaySua,
-						`idLoaiThuoc`=:idThuoc,`idHang`=:idHang,`idBenh`=:idBenh
-					WHERE 1 ";
+						`ThanhTien`=:thanhTien,`NgaySua`=:ngaySua
+					WHERE id=:id ";
 			$statement = $db->prepare($query);
 			$statement->bindValue(':Soluong', $soLuongNhap);
 			$statement->bindValue(':soTienDonVi', $sotiendonvi);
 			$statement->bindValue(':thanhTien', $thanhtien);
-			$statement->bindValue(':ngayNhap', $ngaynhap);
 			$statement->bindValue(':ngaySua', $ngaysua);
-			$statement->bindValue(':idThuoc', $idthuoc);
-			$statement->bindValue(':idBenh', $idBenh);
-			$statement->bindValue(':idHang', $idHang);
+			$statement->bindValue(':id', $id);
 			$valid = $statement->execute();
 			$statement->closeCursor();
 			return $valid;
 		}
 		
-		public function delete_benh($db, $id) {
-			$query = "DELETE FROM loaibenh WHERE id = :id";
+		public function delete_don_nhap_hang($db, $id) {
+			$query = "DELETE FROM nhapthuoc WHERE id = :id";
 			$statement = $db->prepare($query);
 			$statement->bindValue(':id', $id);
 			$valid = $statement->execute();

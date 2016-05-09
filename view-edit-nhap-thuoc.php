@@ -38,6 +38,10 @@
 	                                	value="<?php echo $item['TenThuoc']?>" readonly	required/>
 	                            </div>
 	                             <div>
+	                                <input type="hidden" name=id id="id" class="form-control" 
+	                                	value="<?php echo $item['id']?>" readonly	required/>
+	                            </div>
+	                             <div>
 	                                <label for="TenHang">Tên hãng sản xuất</label>
 	                                <input type="text" name="TenHang" id="TenHang" class="form-control" 
 	                                	value="<?php echo $item['TenHang']?>" readonly	required/>
@@ -62,8 +66,12 @@
 	                                <input type="number" name="thanhtien" id="thanhtien" class="form-control" 
 	                                	value="<?php echo $item['ThanhTien']?>"   readonly required/>
 	                            </div>
+	                            <div class="form-group">
+	                                <input type="hidden" name="soluongcu" id="soluongcu" class="form-control" 
+	                                	value="<?php echo $item['SoLuongNhap']?>" required/>
+	                            </div>
                             </div>
-                            <input type="hidden" name="action" value="add-2" />
+                            <input type="hidden" name="action" value="postedit" />
                             <button type="submit" class="btn btn-default">Sửa đơn hàng</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
