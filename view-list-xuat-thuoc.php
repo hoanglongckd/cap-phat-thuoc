@@ -51,11 +51,11 @@
                                 <td><?php echo date('d-m-Y', strtotime($xuatthuoc['NgayXuat'])); ?></td>
                                 <td><?php echo date('d-m-Y', strtotime($xuatthuoc['NgaySua'])); ?></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i>
-                                	<a href="ControllerHang.php?action=edit&id=<?php echo $xuatthuoc['id']; ?>">Edit</a>
+                                	<a href="ControllerXuatThuoc.php?action=edit&id=<?php echo $xuatthuoc['id']; ?>">Edit</a>
                                 </td>
                                 <td class="center"><i class="fa fa-trash-o fa-fw"></i> 
                                 	<a 	onclick="return deleteConfirm('Bạn có thật sự muốn xóa?')" 
-                                		href="ControllerHang.php?action=delete&id=<?php echo $xuatthuoc['id']; ?>">
+                                		href="ControllerXuatThuoc.php?action=delete&id=<?php echo $xuatthuoc['id']; ?>">
                                 		Delete
                                 	</a>
                                 </td>

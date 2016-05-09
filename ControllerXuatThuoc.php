@@ -134,14 +134,16 @@
 			break;
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id');
-			if ($mt->delete($db, $id)) {
+			$xuatthuoc = $mxt->get_so_luong_xuat($db, $id);
+			if ($mxt->delete($db, $id)) {
+				$mt->increment($db, $xuatthuoc['idLoaiThuoc'], $xuatthuoc['SoLuongXuat']);
 				$_SESSION['flash-level'] = 'success';
 				$_SESSION['flash-message'] = 'Xóa thành công!';
 			} else {
 				$_SESSION['flash-level'] = 'danger';
 				$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
 			}
-			header("Location: view-list-thuoc.php");
+			header("Location: view-list-xuat-thuoc.php");
 			break;
 		default:
 			$xuatthuocs = $mxt->list_xuat_thuoc($db);

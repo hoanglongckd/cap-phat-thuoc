@@ -33,6 +33,27 @@
 			return $row;
 		}
 		
+		// Lay so luong thuoc da xuat
+		public function get_so_luong_xuat($db, $id) {
+			$query = "SELECT SoLuongXuat, idLoaiThuoc FROM xuatthuoc WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$row = $statement->fetch();
+			$statement->closeCursor();
+			return $row;
+		}
+		
+		// Xoa don thuoc da duoc xuat
+		public function delete($db, $id) {
+			$query = "DELETE FROM xuatthuoc WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
+		
 	}
 
 ?>
