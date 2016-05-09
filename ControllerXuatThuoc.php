@@ -83,7 +83,7 @@
 			$data .= '</div>';
 			$data .= '<input type="hidden" name="action" id="action" value="postexport" />';
 			$data .= '<button type="button" id="exportdrug" onclick="exportDrug()" class="btn btn-default">Add Drug</button>';
-			$data .= '<button type="reset" class="btn btn-default">Reset</button>';
+			$data .= '<button type="button" id="resetxuathang" onclick="exportDrug()" class="btn btn-default">Reset</button>';
 			echo $data;
 			break;
 		case 'edit':

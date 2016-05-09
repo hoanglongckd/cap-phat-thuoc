@@ -70,27 +70,31 @@ function exportDrug() {
 									success: function (data) {
 										$("#insert-input-to-export").html(data);
 										
+										$("#resetxuathang").click(function() {
+											document.getElementById("soluongxuat").value = "";
+											document.getElementById("sotien").value = "";
+										});
 										$("#exportdrug").click(function () {
-											var soLuongXuat = parseInt($("#soluongxuat").val());
+											var soLuongXuat = $("#soluongxuat").val();
 											console.log(soLuongXuat);
-											var soLuongTonKho = parseInt($("#tonkho").val());
+											var soLuongTonKho = $("#tonkho").val();
 											console.log(soLuongTonKho);
-											var soTien = parseInt($("#sotien").val());
+											var soTien = $("#sotien").val();
 											console.log(soTien);
-											
-											if (soLuongXuat > soLuongTonKho) {
+											console.log()
+											if (parseInt(soLuongXuat) > parseInt(soLuongTonKho)) {
 												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc xuất đi không thể lớn hơn số lượng thuốc tồn kho.</li></ul></div></div>';
 												$("#errors").html(errors);
-												console.log("aaaa")
-											}else if (soLuongXuat <= 0) {
+											}else if (parseInt(soLuongXuat) <= 0 || soLuongXuat == "") {
 												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc xuất đi phải lớn hơn 0.</li></ul></div></div>';
 												$("#errors").html(errors);
-												console.log("bbbb")
-											}else if (soTien <= 0) {
+											}else if (parseInt(soTien) <= 0 || soTien == "") {
 												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số tiền trên một đơn vị phải lớn hơn 0.</li></ul></div></div>';
 												$("#errors").html(errors);
-												console.log("cccc")
 											}else {
+												soLuongXuat = parseInt(soLuongXuat);
+												soLuongTonKho = parseInt(soLuongTonKho);
+												soTien = parseInt(soTien);
 												var idThuoc = parseInt($('#TenThuoc').val());
 												console.log(idThuoc)
 												var action = $('#action').val();
