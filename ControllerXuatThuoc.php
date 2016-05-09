@@ -88,49 +88,77 @@
 			break;
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id');
-			$thuoc = $mt->get_edit_thuoc($db, $id);
-			if (!empty($thuoc)) {
-				$_SESSION['SuaThuoc'] = $thuoc;
-				$_SESSION['benhs'] = $mb->list_benh($db);
-				$_SESSION['hangs'] = $mh->list_hang($db);
-				header("Location: view-edit-thuoc.php");
+			$xuatthuoc = $mxt->get_edit_xuat_thuoc($db, $id);
+			if (!empty($xuatthuoc)) {
+				$_SESSION['XuatThuoc'] = $xuatthuoc;
+				header("Location: view-edit-xuat-thuoc.php");
 			} else {
 				$_SESSION['flash-level'] = 'danger';
 				$_SESSION['flash-error'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-				header("Location: view-list-thuoc.php");
+				header("Location: view-list-xuat-thuoc.php");
 			}
 			break;
 		case 'postedit':
 			$id = filter_input(INPUT_POST, 'id');
-			$idHang = filter_input(INPUT_POST, 'idHang');
-			$idBenh = filter_input(INPUT_POST, 'idBenh');
-			$tenThuoc = filter_input(INPUT_POST, 'TenThuoc');
-			$dinhLuong = filter_input(INPUT_POST, 'DinhLuong');
-			$moTa = filter_input(INPUT_POST, 'MoTa');
-			if (!$mt->thuoc_exist_not_itself($db, $id, $tenThuoc, $idHang, $idBenh)) {
-				$valid = $mt->post_edit_thuoc($db, $id, $tenThuoc, $dinhLuong, $moTa, $idBenh, $idHang);
-				if ($valid) {
+			$soLuongToiDa = filter_input(INPUT_POST, 'SoLuongToiDa');
+			$soLuongXuat = filter_input(INPUT_POST, 'SoLuongXuat');
+			$soTienTrenMotDonVi = filter_input(INPUT_POST, 'SoTienTrenMotDonVi');
+			
+			if ($soLuongToiDa < $soLuongXuat) {
+				$_SESSION['flash-level'] = 'danger';
+				$_SESSION['flash-error'] = 'Số lượng xuất không thể lớn hơn số lượng tối đa có thể xuất.';
+				header("Location: ControllerXuatThuoc.php?action=edit&id=$id");
+			}else if ($soLuongXuat <= 0) {
+				$_SESSION['flash-level'] = 'danger';
+				$_SESSION['flash-error'] = 'Số lượng xuất phải lớn hơn 0.';
+				header("Location: ControllerXuatThuoc.php?action=edit&id=$id");
+			} else if ($soTienTrenMotDonVi <= 0) {
+				$_SESSION['flash-level'] = 'danger';
+				$_SESSION['flash-error'] = 'Số tiền trên một đơn vị phải lớn hơn 0.';
+				header("Location: ControllerXuatThuoc.php?action=edit&id=$id");
+			} else {
+				$idLoaiThuoc = filter_input(INPUT_POST, 'idLoaiThuoc');
+				$now = Date('Y-m-d');
+				$thanhTien = ( (int)$soLuongXuat ) * ( (int)$soTienTrenMotDonVi );
+				if ($mxt->post_edit_xuat_thuoc($db, $id, $soLuongXuat, $soTienTrenMotDonVi, $thanhTien, $now)) {
+					$tonKho = ( (int)$soLuongToiDa ) - ( (int)$soLuongXuat ); 
+					$mt->update_ton_kho($db, $idLoaiThuoc, $tonKho);
 					$_SESSION['flash-level'] = 'success';
 					$_SESSION['flash-message'] = 'Sửa thành công.';
-					header("Location: view-list-thuoc.php");
+					header("Location: view-list-xuat-thuoc.php");
 				} else {
 					$_SESSION['flash-level'] = 'danger';
 					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
-					header("Location: view-list-thuoc.php");
+					header("Location: view-list-xuat-thuoc.php");
 				}
-			} else {
-				$_SESSION['SuaThuoc']['id'] = $id;
-				$_SESSION['SuaThuoc']['TenThuoc'] = $tenThuoc;
-				$_SESSION['SuaThuoc']['DinhLuong'] = $dinhLuong;
-				$_SESSION['SuaThuoc']['MoTa'] = $moTa;
-				$_SESSION['SuaThuoc']['idHang'] = $idHang;
-				$_SESSION['SuaThuoc']['idLoaiBenh'] = $idBenh;
-				$_SESSION['benhs'] = $mb->list_benh($db);
-				$_SESSION['hangs'] = $mh->list_hang($db);
-				$_SESSION['flash-level'] = 'danger';				
-				$_SESSION['flash-error'] = 'Tên thuốc tương ứng với tên hãng và tên bệnh đã tồn tại.';
-				header("Location: view-edit-thuoc.php");
 			}
+			
+// 			$dinhLuong = filter_input(INPUT_POST, 'DinhLuong');
+// 			$moTa = filter_input(INPUT_POST, 'MoTa');
+// 			if (!$mt->thuoc_exist_not_itself($db, $id, $tenThuoc, $idHang, $idBenh)) {
+// 				$valid = $mt->post_edit_thuoc($db, $id, $tenThuoc, $dinhLuong, $moTa, $idBenh, $idHang);
+// 				if ($valid) {
+// 					$_SESSION['flash-level'] = 'success';
+// 					$_SESSION['flash-message'] = 'Sửa thành công.';
+// 					header("Location: view-list-thuoc.php");
+// 				} else {
+// 					$_SESSION['flash-level'] = 'danger';
+// 					$_SESSION['flash-message'] = 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+// 					header("Location: view-list-thuoc.php");
+// 				}
+// 			} else {
+// 				$_SESSION['SuaThuoc']['id'] = $id;
+// 				$_SESSION['SuaThuoc']['TenThuoc'] = $tenThuoc;
+// 				$_SESSION['SuaThuoc']['DinhLuong'] = $dinhLuong;
+// 				$_SESSION['SuaThuoc']['MoTa'] = $moTa;
+// 				$_SESSION['SuaThuoc']['idHang'] = $idHang;
+// 				$_SESSION['SuaThuoc']['idLoaiBenh'] = $idBenh;
+// 				$_SESSION['benhs'] = $mb->list_benh($db);
+// 				$_SESSION['hangs'] = $mh->list_hang($db);
+// 				$_SESSION['flash-level'] = 'danger';				
+// 				$_SESSION['flash-error'] = 'Tên thuốc tương ứng với tên hãng và tên bệnh đã tồn tại.';
+// 				header("Location: view-edit-thuoc.php");
+// 			}
 			break;
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id');

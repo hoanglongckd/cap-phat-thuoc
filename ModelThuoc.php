@@ -163,6 +163,17 @@
 			$statement->execute();
 			$statement->closeCursor();
 		}
+		
+		// Cap nhap so luong thuoc trong kho khi sua don thuoc da xuat
+		public function update_ton_kho ($db, $id, $tonKho) {
+			$query = "UPDATE loaithuoc SET SoLuongTonKho = :tonKho WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':tonKho', $tonKho);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
 	}
 
 
