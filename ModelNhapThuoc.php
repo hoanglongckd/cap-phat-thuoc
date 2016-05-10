@@ -12,14 +12,15 @@
 		
 		public function add_nhap_hang($db, $soLuongNhap,$sotiendonvi,$thanhtien,$ngaynhap,$idthuoc,$idHang,$idBenh) {
 			$query = "INSERT INTO nhapthuoc
-								(`SoLuongNhap`, `SoTienTrenMotDonVi`, `ThanhTien`, `NgayNhap`, `idLoaiThuoc`, idHang, idBenh )
+								(`SoLuongNhap`, `SoTienTrenMotDonVi`, `ThanhTien`, `NgayNhap`, `NgaySua`, `idLoaiThuoc`, idHang, idBenh )
 							  VALUES
-								(:soluong, :sotiendonvi , :thanhtien, :ngaynhap, :idloaithuoc, :idHang, :idBenh)";
+								(:soluong, :sotiendonvi , :thanhtien, :ngaynhap, :ngaysua, :idloaithuoc, :idHang, :idBenh)";
 			$statement = $db->prepare($query);
 			$statement->bindValue(':soluong', $soLuongNhap);
 			$statement->bindValue(':sotiendonvi', $sotiendonvi);
 			$statement->bindValue(':thanhtien', $thanhtien);
 			$statement->bindValue(':ngaynhap', $ngaynhap);
+			$statement->bindValue(':ngaysua', $ngaynhap);
 			$statement->bindValue(':idloaithuoc', $idthuoc);
 			$statement->bindValue(':idBenh', $idBenh);
 			$statement->bindValue(':idHang', $idHang);

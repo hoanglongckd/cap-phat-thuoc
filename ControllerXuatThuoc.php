@@ -40,7 +40,7 @@
 				$_SESSION['flash-message'] = 'Xuất thuốc thành công!';
 				echo 'success';
 			} else {
-				echo 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ.';
+				echo 'Xảy ra lỗi. Vui lòng liên hệ với quản trị viên để được giúp đỡ123.';
 			}
 			break;
 		case 'getthuoc':
