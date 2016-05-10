@@ -33,6 +33,58 @@
 			return $row;
 		}
 		
+		// Lay so luong thuoc da xuat
+		public function get_so_luong_xuat($db, $id) {
+			$query = "SELECT SoLuongXuat, idLoaiThuoc FROM xuatthuoc WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$row = $statement->fetch();
+			$statement->closeCursor();
+			return $row;
+		}
+		
+		// Xoa don thuoc da duoc xuat
+		public function delete($db, $id) {
+			$query = "DELETE FROM xuatthuoc WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
+		
+		public function get_edit_xuat_thuoc ($db, $id) {
+			$query = "SELECT xuatthuoc.*, loaithuoc.TenThuoc, loaithuoc.SoLuongTonKho
+						, loaibenh.TenBenh, hang.TenHang FROM xuatthuoc 
+						INNER JOIN loaithuoc ON xuatthuoc.idLoaiThuoc = loaithuoc.id 
+						INNER JOIN loaibenh ON loaithuoc.idLoaiBenh = loaibenh.id 
+						INNER JOIN hang ON loaithuoc.idHang = hang.id 
+						WHERE xuatthuoc.id = :id
+						ORDER BY xuatthuoc.NgaySua DESC";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$row = $statement->fetch();
+			$statement->closeCursor();
+			return $row;
+		}
+		
+		public function post_edit_xuat_thuoc ($db, $id, $soLuong, $soTienTrenMotDonVi, $thanhTien, $ngaySua) {
+			$query = "UPDATE xuatthuoc SET SoLuongXuat = :soLuong, SoTienTrenMotDonVi = :soTienTrenMotDonVi
+						, ThanhTien = :thanhTien, NgaySua = :ngaySua
+						WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':soLuong', $soLuong);
+			$statement->bindValue(':soTienTrenMotDonVi', $soTienTrenMotDonVi);
+			$statement->bindValue(':thanhTien', $thanhTien);
+			$statement->bindValue(':ngaySua', $ngaySua);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
+		
 	}
 
 ?>

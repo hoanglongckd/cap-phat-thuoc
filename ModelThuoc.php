@@ -153,6 +153,27 @@
 			$statement->execute();
 			$statement->closeCursor();
 		}
+		
+		// Cong them so luong thuoc trong kho khi xoa viec xuat thuoc
+		public function increment($db, $id, $soLuong) {
+			$query = "UPDATE loaithuoc SET SoLuongTonKho = (SoLuongTonKho + :soLuong) WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':soLuong', $soLuong);
+			$statement->bindValue(':id', $id);
+			$statement->execute();
+			$statement->closeCursor();
+		}
+		
+		// Cap nhap so luong thuoc trong kho khi sua don thuoc da xuat
+		public function update_ton_kho ($db, $id, $tonKho) {
+			$query = "UPDATE loaithuoc SET SoLuongTonKho = :tonKho WHERE id = :id";
+			$statement = $db->prepare($query);
+			$statement->bindValue(':tonKho', $tonKho);
+			$statement->bindValue(':id', $id);
+			$valid = $statement->execute();
+			$statement->closeCursor();
+			return $valid;
+		}
 	}
 
 
