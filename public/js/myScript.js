@@ -165,17 +165,14 @@ function importDrug() {
 									data: {},
 									success: function (data) {
 										$("#insert-input-to-import").html(data);
-										
-										$("#importDrug").click(function () {
+										$("#fee").blur(function () {
+											aleart("sdsad")
 											var soLuongNhap = parseInt($("#soluong").val());
-											console.log(soLuongXuat);
-											var soLuongTonKho = parseInt($("#tonkho").val());
-											console.log(soLuongTonKho);
+											console.log(soLuongNhap);
 											var soTien = parseInt($("#fee").val());
 											console.log(soTien);
-											
 											if (soLuongXuat <= 0) {
-												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc xuất đi phải lớn hơn 0.</li></ul></div></div>';
+												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc nhập vào phải lớn hơn 0.</li></ul></div></div>';
 												$("#errors").html(errors);
 												//console.log("bbbb")
 											}else if (soTien <= 0) {

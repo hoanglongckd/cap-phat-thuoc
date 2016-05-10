@@ -183,6 +183,9 @@
 			echo $data;
 			break;
 		case 'getsoluongthuoc';
+			$soluong1 = filter_input(INPUT_POST, 'soLuongNhap');
+			$sotiendonvi1 = filter_input(INPUT_POST, 'soTien');
+			$thanhtien1 = $soluong1 *$sotiendonvi1;
 			$data = '';
 			$data .= '<div class="form-group">';
 			$data .= '<label for="soluong">Số lượng nhập</label>';
@@ -190,12 +193,12 @@
 			$data .= '</div>';
 			$data .= '<div class="form-group">';
 			$data .= '<label for="fee">Số tiền trên một đơn vị</label>';
-			$data .= '<input type="number" class="form-control" name="fee" id="fee" required />';
+			$data .= '<input type="number" class="form-control" name="fee" id="fee" required  onblur="importDrug()"/>';
 			$data .= '</div>';
 			$data .= '<input type="hidden" name="action" value="add-2" />';
-			$data .= '<button type="submit" class="btn btn-default">Thêm đơn hàng</button>';
+			$data .= '<button type="submit" class="btn btn-default" >Thêm đơn hàng</button>';
 			$data .= '<button type="reset" class="btn btn-default">Reset</button>';
-			echo $data;
+			echo $data; 
 		break;
 			
 		default:
