@@ -19,7 +19,7 @@
 		}
 		
 		public function list_xuat_thuoc($db) {
-			$query = "SELECT nhansu.MaNhanSu, nhansu.Ten, nhansu.NgaySinh, nhansu.HeSoLuong, nhansu.CaLamViec, nhansu.MaTaiKhoan, chucvu.TenChucVu from nhansu, chucvu WHERE nhansu.MaChucVu = chucvu.MaChucVu AND Ten like 'D%'";
+			$query = "SELECT xuatthuoc.*, loaithuoc.TenThuoc, loaibenh.TenBenh, hang.TenHang FROM xuatthuoc INNER JOIN loaithuoc ON xuatthuoc.idLoaiThuoc = loaithuoc.id INNER JOIN loaibenh ON loaithuoc.idLoaiBenh = loaibenh.id INNER JOIN hang ON loaithuoc.idHang = hang.id";
 			$statement = $db->prepare($query);
 			$statement->execute();
 			$row = $statement->fetchAll();
