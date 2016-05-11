@@ -197,7 +197,7 @@
 			$data .= '</div>';
 			$data .= '<input type="hidden" name="action" value="add-2" />';
 			$data .= '<button type="submit" class="btn btn-default" >Thêm đơn hàng</button>';
-			$data .= '<button type="reset" class="btn btn-default">Reset</button>';
+			$data .= '<button type="button" id="resetxuathang" onclick="importDrug()" class="btn btn-default">Reset</button>';
 			echo $data; 
 		break;
 			

@@ -152,7 +152,6 @@ function importDrug() {
 					data: {"idBenh": idBenh, "idHang": idHang},
 					success: function (data) {
 						$("#insert-input-drug-import").html(data);
-						
 						$("#TenThuoc").change(function() {
 							var idThuoc = $("#TenThuoc").val();
 							if (idThuoc == "") {
@@ -169,17 +168,19 @@ function importDrug() {
 									data: {},
 									success: function (data) {
 										$("#insert-input-to-import").html(data);
+										$("#resetxuathang").click(function() {
+											document.getElementById("soluongxuat").value = "";
+											document.getElementById("sotien").value = "";
+										});
 										$("#fee").blur(function () {
-											aleart("sdsad")
 											var soLuongNhap = parseInt($("#soluong").val());
 											console.log(soLuongNhap);
 											var soTien = parseInt($("#fee").val());
 											console.log(soTien);
-											if (soLuongXuat <= 0) {
+											if (parseInt(soLuongNhap) <= 0 || soLuongNhap == "") {
 												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số lượng thuốc nhập vào phải lớn hơn 0.</li></ul></div></div>';
 												$("#errors").html(errors);
-												//console.log("bbbb")
-											}else if (soTien <= 0) {
+											}else if (parseInt(soTien) <= 0 || soTien == "") {
 												var errors = '<div class="col-lg-7"><div class="alert alert-danger" ><ul><li>Số tiền trên một đơn vị phải lớn hơn 0.</li></ul></div></div>';
 												$("#errors").html(errors);
 											}else {
