@@ -45,6 +45,10 @@
                                 <label>Lớp</label>
                                 <input class="form-control" value="12T3" readonly />
                             </div>
+                            <div class="form-group">
+                                <label>Nhóm</label>
+                                <input class="form-control" value="12.10" readonly />
+                            </div>
                         <form>
                     </div>
                 </div>
