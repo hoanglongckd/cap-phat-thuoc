@@ -45,7 +45,7 @@
                             
                             <div class="form-group">
                                 <label for="TenBenh">Tên Bệnh</label>
-                                <select class="form-control" name="idBenh" id="TenBenh" onchange="importDrug()" required>
+                                <select class="form-control" name="idBenh" id="TenBenh" onchange="importDrug()" required >
                                 	<option value="">Chọn tên bệnh</option>
                                 <?php foreach ($benhs as $benh) : ?>
                                 	<option value="<?php echo $benh['id']?>" ><?php echo $benh['TenBenh']?></option>

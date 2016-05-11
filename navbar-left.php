@@ -13,10 +13,10 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="./"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Loại Bệnh<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-list fa-fw"></i> Loại Bệnh<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="view-add-benh.php">Thêm Bệnh</a>
@@ -54,7 +54,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Nhập Thuốc<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-plus-sign fa-fw"></i> Nhập Thuốc<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="ControllerNhapThuoc.php?action=add">Thêm đơn hàng</a>
@@ -67,7 +67,7 @@
                         </li>
                         
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-minus fa-fw"></i> Xuất thuốc<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-minus-sign fa-fw"></i> Xuất thuốc<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="ControllerXuatThuoc.php?action=getexport">Xuất đơn hàng </a>

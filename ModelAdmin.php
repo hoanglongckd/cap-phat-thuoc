@@ -8,9 +8,10 @@
 			session_destroy();	// Clean up the session ID
 		}
 		
+		// kiem tra user co ton tai hay khong
 		public function is_valid_login($db, $username, $password) {
 			$password = md5($username . $password);
-			$query = "SELECT level FROM admin WHERE
+			$query = "SELECT id, level FROM admin WHERE
 						username = :username AND password = :password";
 			$statement = $db->prepare($query);
 			$statement->bindValue(':username', $username);
@@ -18,7 +19,7 @@
 			$statement->execute();
 			$row = $statement->fetch();
 			$statement->closeCursor();
-			return $row['level'];
+			return $row;
 		}
 		
 		public function user_exist($db, $username) {
@@ -65,9 +66,8 @@
 		
 		public function post_edit_user($db, $id, $username, $password) {
 			$password = md5($username . $password);
-			$query = "UPDATE admin SET username = :username, password = :password where id = :id ";
+			$query = "UPDATE admin SET password = :password where id = :id ";
 			$statement = $db->prepare($query);
-			$statement->bindValue(':username', $username);
 			$statement->bindValue(':password', $password);
 			$statement->bindValue('id', $id);
 			$valid = $statement->execute();

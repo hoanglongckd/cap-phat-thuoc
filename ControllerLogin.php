@@ -18,10 +18,11 @@
 	}
 	
 	$ma = new Admin();
-	$level = $ma->is_valid_login($db, $username, $password);
-	if(!empty($level)) {
+	$user = $ma->is_valid_login($db, $username, $password);
+	if(!empty($user)) {
+		$_SESSION['user']['id'] = $user['id'];
 		$_SESSION['user']['username'] = $username;
-		$_SESSION['user']['level'] = $level;
+		$_SESSION['user']['level'] = $user['level'];
 		header("Location: dashboard.php");
 	}
 	else {
