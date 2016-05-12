@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Drug
+                        <h1 class="page-header">Export Drug
                             <small>Edit</small>
                         </h1>
                     </div>

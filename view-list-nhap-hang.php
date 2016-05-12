@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Bệnh
+                        <h1 class="page-header">Import Drug
                             <small>List</small>
                         </h1>
                     </div>

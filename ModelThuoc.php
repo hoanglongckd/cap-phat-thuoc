@@ -113,7 +113,7 @@
 		}
 		
 		public function delete($db, $id) {
-			$query = "DELETE FROM loaithuoc where id = :id";
+			$query = "DELETE FROM loaithuoc WHERE id = :id";
 			$statement = $db->prepare($query);
 			$statement->bindValue(':id', $id);
 			$valid = $statement->execute();
